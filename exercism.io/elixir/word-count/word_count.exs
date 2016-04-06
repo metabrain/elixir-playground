@@ -6,7 +6,11 @@ defmodule Words do
   """
   @spec count(String.t) :: map
   def count(sentence) do
-      countWords(Regex.run(~r/\w+/iu, sentence))
+      sentence = String.replace(sentence, "_", " ")
+      sentence = String.replace(sentence, "-", "_")
+      words = List.flatten(Regex.scan(~r/\w+/iu, sentence))
+      res = countWords(words)
+      Enum.into(Enum.map(res, fn {k,v} -> {String.replace(k, "_", "-"), v} end), %{})
   end
 
   def incMap(n) do
@@ -18,7 +22,7 @@ defmodule Words do
 
   def countWords([]), do: %{}
   def countWords([head|tail]) do
-    IO.puts "head #{head}"
+    head = String.downcase(head)
     elem(Map.get_and_update(countWords(tail), head, fn n -> incMap(n) end), 1)
   end
 end

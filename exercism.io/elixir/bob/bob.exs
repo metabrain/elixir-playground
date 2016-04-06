@@ -22,14 +22,15 @@ defmodule Bob do
   def heyRec([], false, _), do: "Whatever."
   def heyRec([], true, true), do: "Whoa, chill out!"
   def heyRec(["?"], _, _),  do: "Sure."
-  def heyRec(l, yell, _) do
+  def heyRec(l, yell, letters) do
     head = hd(l)
     tail = tl(l)
-    IO.puts("head: #{head} tail: #{tail} yell: #{yell}")
+    IO.puts("is head letter: #{headletter}")
+    IO.puts("head: #{head} tail: #{tail} yell: #{yell} letters: #{letters}")
     # <> " tail: " <> tail <> " yell: " <> yell) 
     case String.upcase(head) do
-       ^head -> heyRec(tail, yell)
-       _ -> heyRec(tail, false)
+       ^head -> heyRec(tail, yell, headletter)
+       _ -> heyRec(tail, false, false)
     end
   end
 end
