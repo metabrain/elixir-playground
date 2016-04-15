@@ -40,4 +40,9 @@ defmodule Test do
     assert Chapter_05.realFizzBuzz(15) == "FizzBuzz"
     assert Chapter_05.realFizzBuzz(16) == 16
   end
+
+  test "prefix" do
+    assert Chapter_05.prefix().("Mrs").("Smith") === "Mrs Smith"
+    assert Chapter_05.prefix().("Elixir").("Rocks") === "Elixir Rocks"
+  end
 end

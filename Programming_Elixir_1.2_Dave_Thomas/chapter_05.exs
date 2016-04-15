@@ -24,4 +24,16 @@ defmodule Chapter_05 do
   def realFizzBuzz(n) do
     fizzbuzz(rem(n,3), rem(n,5), n)
   end
+
+  myMap = Enum.map [1,2,3,4], &(&1 + 2)
+  myInspectMap = Enum.map [1,2,3,4], &(IO.inspect(&1))
+
+  def prefix() do 
+    fn title -> 
+      fn name -> 
+        title <> " " <> name
+      end
+    end
+  end
+
 end
