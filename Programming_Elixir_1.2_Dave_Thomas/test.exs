@@ -79,4 +79,8 @@ defmodule Test do
   test "caesar" do
     assert Chapter_07.caesar('ryvkve', 13) === 'elixir'
   end
+
+  test "span" do
+    assert Chapter_07.span(10,15) === [10, 11, 12, 13, 14, 15]
+  end
 end
