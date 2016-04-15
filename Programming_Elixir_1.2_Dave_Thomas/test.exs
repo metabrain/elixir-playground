@@ -1,4 +1,6 @@
 Code.load_file("chapter_05.exs")
+Code.load_file("chapter_06.exs")
+Code.load_file("chapter_07.exs")
 
 ExUnit.start
 #ExUnit.configure exclude: :pending, trace: true
@@ -44,5 +46,37 @@ defmodule Test do
   test "prefix" do
     assert Chapter_05.prefix().("Mrs").("Smith") === "Mrs Smith"
     assert Chapter_05.prefix().("Elixir").("Rocks") === "Elixir Rocks"
+  end
+
+  test "mytimes" do
+    assert Chapter_06.Times.double(10) === 20
+    assert Chapter_06.Times.triple(10) === 30
+    assert Chapter_06.Times.quadruple(10) === 40
+  end
+
+  test "recsum" do
+    assert Chapter_06.sum(2) === 3
+    assert Chapter_06.sum(3) === 6
+    assert Chapter_06.sum(4) === 10
+  end
+
+  test "gcd" do
+    assert Chapter_06.gcd(54,24) === 6
+  end
+
+  test "guess" do
+    assert Chapter_06.guess(273, 1..1000)
+  end
+
+  test "mapsum" do
+    assert Chapter_07.mapsum([1,2,3], &(&1 * &1)) === 14
+  end
+
+  test "maxlist" do
+    assert Chapter_07.maxlist([1,2,7,9,3,10,2,5,9]) === 10
+  end
+
+  test "caesar" do
+    assert Chapter_07.caesar('ryvkve', 13) === 'elixir'
   end
 end
