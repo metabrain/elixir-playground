@@ -1,6 +1,7 @@
 Code.load_file("chapter_05.exs")
 Code.load_file("chapter_06.exs")
 Code.load_file("chapter_07.exs")
+Code.load_file("chapter_10.exs")
 
 ExUnit.start
 #ExUnit.configure exclude: :pending, trace: true
@@ -82,5 +83,30 @@ defmodule Test do
 
   test "span" do
     assert Chapter_07.span(10,15) === [10, 11, 12, 13, 14, 15]
+  end
+
+  test "all?" do
+    assert Chapter_10.all?([1,2,3,4], &(&1 < 4)) == false
+  end
+
+  test "each" do
+    Chapter_10.each([1,2,3,4], &(if &1 < 4 do IO.puts(&1) end))
+    assert true
+  end
+
+  test "filter" do
+    assert Chapter_10.filter([1,2,3,4], &(&1 < 4)) == [1,2,3]
+  end
+
+  test "split" do
+    assert Chapter_10.split([1,2,3,4,5], 2) == {[1,2], [3,4,5]}
+  end
+
+  test "take" do
+    assert Chapter_10.take([1,2,3,4,5], 3) == [1,2,3]
+  end
+
+  test "flatten" do
+    assert Chapter_10.flatten([1,[2,3,[4],5, [[[6]]]]]) == [1,2,3,4,5,6]
   end
 end
