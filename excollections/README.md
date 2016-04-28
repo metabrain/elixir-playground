@@ -21,7 +21,7 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 ## Data structures
 
 - [x] Stack
-- [ ] Queue
+- [x] Queue
 - [ ] Circular Queue
 - [ ] Set
 - [ ] Priority Queue
