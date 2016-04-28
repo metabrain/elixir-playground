@@ -1,0 +1,2 @@
+defmodule ExCollections do
+end
