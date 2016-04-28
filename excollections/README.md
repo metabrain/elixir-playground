@@ -22,7 +22,7 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 
 - [x] Stack
 - [x] Queue
-- [ ] Circular Queue
+- [ ] --Circular Queue-- irrelevant since it is only useful when data is mutable - which is not Elixir/Erlang VM's case.
 - [ ] Set
 - [ ] Priority Queue
 - [ ] Binary Search Tree
