@@ -20,7 +20,7 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 
 ## Data structures
 
-- [ ] Stack
+- [x] Stack
 - [ ] Queue
 - [ ] Circular Queue
 - [ ] Set
