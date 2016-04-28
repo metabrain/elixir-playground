@@ -7,7 +7,9 @@ defmodule ExCollections.Mixfile do
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     deps: deps]
+     deps: deps,
+     package: package,
+     description: description]
   end
 
   # Configuration for the OTP application
@@ -38,7 +40,7 @@ defmodule ExCollections.Mixfile do
 
   defp package do
     [# These are the default files included in the package
-    files: ["lib", "priv", "mix.exs", "README*", "readme*", "LICENSE*", "license*"],
+     #files: ["lib", "priv", "mix.exs", "README*", "readme*", "LICENSE*", "license*"],
     maintainers: ["Daniel Parreira"],
     licenses: ["MIT License"],
     links: %{"GitHub" => "https://github.com/metabrain/elixir-playground/tree/master/excollections"}
