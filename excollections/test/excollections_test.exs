@@ -56,3 +56,47 @@ defmodule ExCollectionsTest.Queue do
     assert [""] |> ExCollections.Queue.empty? == false 
   end
 end
+
+defmodule ExCollectionsTest.BTree do
+  use ExUnit.Case
+  doctest ExCollections.BTree
+
+  @a {10,{5,{2,{},{}},{7,{},{}}},{20,{},{}}}
+  @b {8, {3,{},{}} , {15, {13,{},{}}, {} } }
+ 
+  test "to_list" do
+    assert @a |> ExCollections.BTree.to_list == [2,5,7,10,20]
+    assert {} |> ExCollections.BTree.to_list == []
+  end
+
+  test "add" do
+    assert {} |> ExCollections.BTree.add(1) |> ExCollections.BTree.to_list == [1]
+    assert {} |> ExCollections.BTree.add(2) |> ExCollections.BTree.add(3) |> ExCollections.BTree.add(1) |> ExCollections.BTree.to_list == [1,2,3]
+  end
+
+  test "min" do
+    assert @a |> ExCollections.BTree.min == 2
+    assert @b |> ExCollections.BTree.min == 3
+  end
+
+  test "max" do
+    assert @a |> ExCollections.BTree.max == 20
+    assert @b |> ExCollections.BTree.max == 15
+  end
+
+  test "remove" do
+    assert @a |> ExCollections.BTree.remove(2)  |> ExCollections.BTree.to_list == [5,7,10,20]
+    assert @a |> ExCollections.BTree.remove(5)  |> ExCollections.BTree.to_list == [2,7,10,20]
+    assert @a |> ExCollections.BTree.remove(7)  |> ExCollections.BTree.to_list == [2,5,10,20]
+    assert @a |> ExCollections.BTree.remove(10) |> ExCollections.BTree.to_list == [2,5,7,20]
+    assert @a |> ExCollections.BTree.remove(20) |> ExCollections.BTree.to_list == [2,5,7,10]
+  end
+
+  test "union" do
+   assert {} |> ExCollections.BTree.union({}) |> ExCollections.BTree.to_list == []
+    assert @a |> ExCollections.BTree.union({})  == @a
+    assert @a |> ExCollections.BTree.union(@b) |> ExCollections.BTree.to_list == [2,3,5,7,8,10,13,15,20]
+  end
+
+
+end
