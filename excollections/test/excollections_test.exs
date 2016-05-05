@@ -74,6 +74,14 @@ defmodule ExCollectionsTest.BTree do
     assert {} |> ExCollections.BTree.add(2) |> ExCollections.BTree.add(3) |> ExCollections.BTree.add(1) |> ExCollections.BTree.to_list == [1,2,3]
   end
 
+  test "contains" do
+     assert @a |> ExCollections.BTree.contains(10) == true
+     assert @a |> ExCollections.BTree.contains(7) == true
+     assert @a |> ExCollections.BTree.contains(21) == false
+     assert @b |> ExCollections.BTree.contains(3) == true
+     assert @a |> ExCollections.BTree.contains(16) == false
+  end
+
   test "min" do
     assert @a |> ExCollections.BTree.min == 2
     assert @b |> ExCollections.BTree.min == 3
@@ -93,10 +101,14 @@ defmodule ExCollectionsTest.BTree do
   end
 
   test "union" do
-   assert {} |> ExCollections.BTree.union({}) |> ExCollections.BTree.to_list == []
+    assert {} |> ExCollections.BTree.union({}) |> ExCollections.BTree.to_list == []
     assert @a |> ExCollections.BTree.union({})  == @a
     assert @a |> ExCollections.BTree.union(@b) |> ExCollections.BTree.to_list == [2,3,5,7,8,10,13,15,20]
   end
 
+  test "intersect" do
+    assert ExCollections.BTree.intersect(@a, @b) == {}
+    assert ExCollections.BTree.intersect(@a, (@b |> ExCollections.BTree.add(20) |> ExCollections.BTree.add(7) |> ExCollections.BTree.add(55))) |> ExCollections.BTree.to_list == [7,20]
+  end
 
 end

@@ -35,6 +35,11 @@ defmodule ExCollections.BTree do
   def remove({val, l, r}, e) when e<=val, do: {val, remove(l,e) , r}
   def remove({val, l, r}, e) when e>val, do: {val, l, remove(r,e)}
 
+  def contains({}, e), do: false
+  def contains({e, _l, _r}, e), do: true
+  def contains({val, l, r}, e) when e<val, do: contains(l,e)
+  def contains({val, l, r}, e) when e>val, do: contains(r,e)
+
   def min({}), do: raise "Empty tree has no minimum!"
   def min({e, {}, _r}), do: e # nothing to left, then e is min
   def min({_, l , _r}), do: min(l) # keep going left while possible
@@ -50,7 +55,10 @@ defmodule ExCollections.BTree do
   # TODO intersection should done over a stream to avoid creating lists of all objects in memory
   def intersect({}, b), do: {}
   def intersect(a, {}), do: {}
-  #def intersect(a, b), do: Enum.reduce(to_list(a), b, fn(x, t) -> add(t, x) end)
+  def intersect(a, b), do: Enum.reduce(to_list(a), {}, fn(x, t) -> intersect(x, t, b) end)
+  def intersect(e, t, t2), do: intersect(e, t, t2, contains(t2, e))
+  def intersect(e, t, t2, true), do: add(t, e)
+  def intersect(e, t, t2, false), do: t
 
   def to_list({}), do: []
   def to_list({e, l, r}), do: to_list(l) ++ [e] ++ to_list(r)
