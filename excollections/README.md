@@ -22,13 +22,14 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 
 - [x] Stack
 - [x] Queue
-- [ ] --Circular Queue-- irrelevant since it is only useful when data is mutable - which is not Elixir/Erlang VM's case.
+- [x] Binary Search Tree
+- [ ] Graph (Adjacency Lists)
 - [ ] Set
 - [ ] Priority Queue
-- [ ] Binary Search Tree
 - [ ] Red-black Tree
 - [ ] AVL Tree
 - [ ] Bitset
+- [ ] --Circular Queue-- irrelevant since it is only useful when data is mutable - which is not Elixir/Erlang VM's case.
 
 ## Algorithms
 
