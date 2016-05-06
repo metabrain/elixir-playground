@@ -112,3 +112,18 @@ defmodule ExCollectionsTest.BTree do
   end
 
 end
+
+defmodule ExCollectionsTest.AdjList do
+  use ExUnit.Case
+  doctest ExCollections.AdjList
+
+  test "add" do
+    assert %{1 => [2], 2 => [1]} == %{} |> ExCollections.AdjList.add {1,2}
+  end
+  
+  test "remove" do
+    assert %{} == %{1 => [2], 2 => [1]} |> ExCollections.AdjList.remove {1,2}
+  end
+
+end
+

@@ -50,7 +50,9 @@ defmodule ExCollections.BTree do
 
   def union({}, b), do: b
   def union(a, {}), do: a
-  def union(a, b), do: Enum.reduce(to_list(a), b, fn(x, t) -> add(t, x) end)
+  def union(a, b), do: Enum.reduce(to_list(a), b, fn(x, t) -> union(t, x, contains(t, x)) end)
+  def union(t, x, true), do: t
+  def union(t, x, false), do: add(t, x)
 
   # TODO intersection should done over a stream to avoid creating lists of all objects in memory
   def intersect({}, b), do: {}
@@ -62,4 +64,27 @@ defmodule ExCollections.BTree do
 
   def to_list({}), do: []
   def to_list({e, l, r}), do: to_list(l) ++ [e] ++ to_list(r)
+end
+
+defmodule ExCollections.AdjList do
+  # map of adjacencies
+  def add(m, {a,b}), do: m |> add_arc({a,b}) |> add_arc({b,a})
+  def add_arc(m, {s,d}), do: Map.update(m, s, [d], &([d|&1]))
+
+  # TODO for remove operation its more effective if it is a map of maps..?
+  def remove(m, {a,b}), do: m |> remove_arc({a,b}) |> remove_arc({b,a})
+  def remove_arc(m, {s,d}) do
+    case m do
+      %{^s => l} -> Enum.reduce(l, Map.delete(m, s), fn(x, m_acc) -> remove_arc_dest(m_acc, x, s) end)
+      _ -> m
+    end
+  end
+  
+
+  def remove_arc_dest(m, s, d) do
+    case m do
+      %{^s => [d]} -> Map.delete(m, s)
+      %{^s => l} -> Map.update(m, s, &(List.delete(&1, d)))
+    end
+  end
 end
